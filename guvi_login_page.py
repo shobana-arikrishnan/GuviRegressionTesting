@@ -1,17 +1,16 @@
 import time
 
-from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.service import Service
-from webdriver_manager.firefox import GeckoDriverManager
 
 
 class GuviLoginPage():
     url = "https://www.guvi.in/sign-in"
-    driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()))
     email_locator = "login_email"
     password_locator = "login_password"
     login_locator = "login_button"
+
+    def __init__(self, driver):
+        self.driver = driver
 
     def browse(self):
         self.driver.maximize_window()

@@ -8,8 +8,8 @@ def test_login_title(login_page):
 def test_login_success(credentials, login_page):
     time.sleep(5)
     login_page.login(credentials["email"], credentials["password"])
-    time.sleep(3)
-    actual_url = 'https://www.guvi.in/courses'
+    time.sleep(5)
+    actual_url = 'https://www.guvi.in/courses.html?current_tab=myCourses'
     expected_url = login_page.driver.current_url
     assert expected_url == actual_url
 
