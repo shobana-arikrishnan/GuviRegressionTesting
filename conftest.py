@@ -4,12 +4,12 @@ from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
 from webdriver_manager.firefox import GeckoDriverManager
 
-from guvi_courses_page_after_login import GuviCoursesPageAfterLogin
-from guvi_courses_page_before_login import GuviCoursesPageBeforeLogin
-from guvi_landing_page import GuviLandingPage
-from guvi_login_page import GuviLoginPage
-from guvi_logout_page import GuviLogoutPage
-from guvi_signup_page import GuviSignupPage
+from pages.guvi_courses_page_after_login import GuviCoursesPageAfterLogin
+from pages.guvi_courses_page_before_login import GuviCoursesPageBeforeLogin
+from pages.guvi_landing_page import GuviLandingPage
+from pages.guvi_login_page import GuviLoginPage
+from pages.guvi_logout_page import GuviLogoutPage
+from pages.guvi_signup_page import GuviSignupPage
 
 config = dotenv_values(".env.test")
 
