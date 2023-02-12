@@ -35,12 +35,7 @@ class GuviLogoutPage():
     def logout(self):
         time.sleep(5)
         logout_dropdown_locator = self.driver.find_element(by=By.XPATH, value=self.logout_dropdown_locator)
-        # Create the ActionChains Object which will take webdriver as an argument
-
         action = ActionChains(self.driver)
-        # Tell the ActionChains to Click on the HTML Element
-        # perform() should be used so that ActionChain can be done successfully
-
         action.click(on_element=logout_dropdown_locator).perform()
         time.sleep(3)
         self.driver.find_element(by=By.ID, value=self.logout_locator).click()

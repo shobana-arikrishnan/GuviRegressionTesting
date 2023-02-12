@@ -5,29 +5,31 @@ def test_login_title(login_page):
     assert (login_page.get_title()) == 'GUVI | Sign-in'
 
 
+def test_login_incorrect_password(credentials, login_page):
+    time.sleep(5)
+    login_page.clear_login_form()
+    login_page.login(credentials["email"], '*****')
+    time.sleep(5)
+    warning = login_page.get_warning()
+    assert warning[1].text == 'Incorrect Username or Password'
+
+
+def test_login_incorrect_email(login_page):
+    time.sleep(5)
+    login_page.clear_login_form()
+    login_page.login('invalidemail@', '*****')
+    time.sleep(5)
+    warning = login_page.get_warning()
+    assert warning[0].text == 'E-mail is Invalid'
+
+
 def test_login_success(credentials, login_page):
     time.sleep(5)
+    login_page.clear_login_form()
     login_page.login(credentials["email"], credentials["password"])
     time.sleep(5)
     actual_url = 'https://www.guvi.in/courses.html?current_tab=myCourses'
     expected_url = login_page.driver.current_url
-    assert expected_url == actual_url
-
-# def test_login_failure():
-#     login_page = GuviLoginPage().browse()
-#     time.sleep(5)
-#     login_page.login("fgfgfgf", password)
-#     time.sleep(5)
-#     email_warn_text = login_page.driver.find_element(By.ID, "email_warn").text
-#     assert email_warn_text == 'E-mail is Invalid'
-#     assert login_page.driver.current_url == 'https://www.guvi.in/sign-in'
-#
-#
-# def test_login_failure_with_good_email():
-#     login_page = GuviLoginPage().browse()
-#     time.sleep(5)
-#     login_page.login('testtest@test.com', password)
-#     time.sleep(5)
-#     email_warn_text = login_page.driver.find_element(By.ID, "pass_warn").text
-#     assert email_warn_text == 'Incorrect Username or Password'
-#     assert login_page.driver.current_url == 'https://www.guvi.in/sign-in'
+    cookie = login_page.driver.get_cookie("USER_DATA")
+    assert cookie["value"] != ''
+    assert expected_url != login_page.url
